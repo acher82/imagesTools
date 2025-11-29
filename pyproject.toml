@@ -1,0 +1,43 @@
+[project]
+name = "imagestools"
+version = "0.1.0"
+description = "The tools to manage home images collection"
+authors = [
+    {name = "acher82",email = "chernomordik@gmail.com"}
+]
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "argparse (>=1.4.0,<2.0.0)",
+]
+
+
+[build-system]
+requires = ["poetry-core>=2.0.0,<3.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[dependency-groups]
+dev = [
+    "black (>=25.9.0,<26.0.0)",
+    "ruff (>=0.14.1,<0.15.0)",
+    "mypy (>=1.18.2,<2.0.0)",
+    "pre-commit (>=4.3.0,<5.0.0)"
+]
+
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "I", "N", "UP"]
+ignore = ["E501"]
+
+[tool.mypy]
+ignore_missing_imports = true
+strict = true
+
+plugins = ["pydantic.mypy"]
+
+["mypy-pydantic.*"]
+ignore_missing_imports = false
