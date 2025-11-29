@@ -115,6 +115,22 @@ files = [
 ]
 
 [[package]]
+name = "exifread"
+version = "3.5.1"
+description = "Library to extract Exif information from digital camera image files."
+optional = false
+python-versions = ">=3.7"
+groups = ["main"]
+files = [
+    {file = "exifread-3.5.1-py3-none-any.whl", hash = "sha256:e5426ce2857423ad401e575ea9d159dc97449dc041fb6e61b35109caea72c311"},
+    {file = "exifread-3.5.1.tar.gz", hash = "sha256:9f998f80d3062741c976dfc4fd033424bc40932937994e4d2181eb70c4b6aedd"},
+]
+
+[package.extras]
+dev = ["build (>=1.0,<2.0)", "pre-commit (>=2.21,<3.0)", "pylint (>=3.1,<4.0)"]
+test = ["pytest (>=7.4,<8.0)"]
+
+[[package]]
 name = "filelock"
 version = "3.20.0"
 description = "A platform independent file lock."
@@ -535,4 +551,4 @@ test = ["covdefaults (>=2.3)", "coverage (>=7.2.7)", "coverage-enable-subprocess
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12"
-content-hash = "79ab26214790bed783bb61b4171f513142e3521ec2784b5cf5826ff643f3f84e"
+content-hash = "ed4b6c61608e5f9a4797c48d60a626978eeb3fc28ab3496f657b9e72b9f07c2b"
