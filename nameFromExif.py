@@ -33,9 +33,12 @@ for file in only_files:
         date_str = tags["EXIF DateTimeOriginal"]
         dt = datetime.strptime(date_str.__str__(), "%Y:%m:%d %H:%M:%S")
         new_name = dt.strftime(args.format)
-        if os.path.exists(os.path.join(args.path, new_name)):
-            new_name = new_name.replace(".jpg", f"_{random.randint(1000, 9999)}.jpg")
-        os.rename(os.path.join(args.path, file), os.path.join(args.path, new_name))
+        if file != new_name:
+            if os.path.exists(os.path.join(args.path, new_name)):
+                new_name = new_name.replace(
+                    ".jpg", f"_{random.randint(1000, 9999)}.jpg"
+                )
+            os.rename(os.path.join(args.path, file), os.path.join(args.path, new_name))
         print(new_name)
 
     except Exception as ex:
