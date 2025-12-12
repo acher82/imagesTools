@@ -1,7 +1,6 @@
 import argparse
 import os
 import random
-import sys
 from datetime import datetime
 
 import exifread
@@ -23,13 +22,16 @@ only_files = [
     f for f in os.listdir(args.path) if os.path.isfile(os.path.join(args.path, f))
 ]
 for file in only_files:
-    sys.stdout.write(file)
-    sys.stdout.write("-->")
+    if not (file.lower().endswith(".jpg") or file.lower().endswith(".jpeg")):
+        continue
+    log_message = file
     try:
         f = open(os.path.join(args.path, file), "rb")
         tags = exifread.process_file(f)
         f.close()
 
+        if "EXIF DateTimeOriginal" not in tags:
+            continue
         date_str = tags["EXIF DateTimeOriginal"]
         dt = datetime.strptime(date_str.__str__(), "%Y:%m:%d %H:%M:%S")
         new_name = dt.strftime(args.format)
@@ -39,7 +41,10 @@ for file in only_files:
                     ".jpg", f"_{random.randint(1000, 9999)}.jpg"
                 )
             os.rename(os.path.join(args.path, file), os.path.join(args.path, new_name))
-        print(new_name)
+            log_message += f" --> {new_name}"
 
     except Exception as ex:
-        print(f"{type(ex).__name__} {ex}")
+        log_message += f" --X ERROR: {type(ex).__name__} {ex}"
+
+    if log_message != file:
+        print(log_message)
